@@ -4,7 +4,7 @@ import {CommonModule} from '@angular/common';
 
 @Component({
   standalone: true,
-  selector: 'em-validator',
+  selector: 'app-validator',
   templateUrl: './validator.component.html',
   imports: [CommonModule],
   styleUrls: ['./validator.component.scss']
@@ -27,7 +27,7 @@ export class ValidatorComponent implements OnDestroy {
   }
 
   ngOnDestroy(): void {
-    this._control = null;
+    // this._control = null;
     this.field = null;
   }
 }

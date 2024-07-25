@@ -1,0 +1,16 @@
+<div class="card shadow text-center mb-5">
+  <div class="card-header bg-primary text-light">
+    <h4>{{todoId ? 'EDIT TODO' : 'ADD TODO'}}</h4>
+  </div>
+  <div class="card-body">
+    <form [formGroup]="form"  (submit)="onSubmit()">
+      <div class="form-group">
+        <input type="text" name="todo" class="form-control" placeholder="Add Todo . . ." formControlName="title">
+        <app-validator
+          [fieldControl]="f['title']"
+        ></app-validator>
+      </div>
+      <button class="btn btn-primary" [disabled]="form.invalid">{{todoId ? 'EDIT' : 'ADD'}}</button>
+    </form>
+  </div>
+</div>

@@ -30,10 +30,4 @@ export class SessionStorageService {
     sessionStorage.removeItem(key);
   }
 
-  /**
-   *  clear storage data
-   */
-  clear(): void {
-    sessionStorage.clear();
-  }
 }

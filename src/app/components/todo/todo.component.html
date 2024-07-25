@@ -1,0 +1,22 @@
+<li class="list-group-item todo"
+    [class.list-group-item-success]="todo.completed"
+    [class.border-primary]="todo.completed">
+  <div class="left-content">
+    <input type="checkbox" class="form-check-input" id="complete" [disabled]="loading"
+           [(ngModel)]="todo.completed"
+           (change)="onChange(todo)">
+    <div>
+      <label for="complete" class="form-check-label lead">{{todo.title}}</label>
+      <div >{{todo.created_at | date}}</div>
+    </div>
+  </div>
+
+  <div class="d-flex gap-1">
+    <button (click)="edit.emit()" mat-mini-fab color="primary">
+      <mat-icon>edit</mat-icon>
+    </button>
+    <button (click)="delete.emit()" mat-mini-fab color="warn">
+      <mat-icon>delete</mat-icon>
+    </button>
+  </div>
+</li>

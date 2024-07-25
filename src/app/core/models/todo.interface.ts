@@ -1,11 +1,11 @@
-export interface IPaymeTodo {
-  count: 8;
+export interface ITodo {
+  count: number;
   next: null;
   previous: null;
-  results: IPaymeTodoList[];
+  results: ITodoList[];
 
 }
-export interface IPaymeTodoList {
+export interface ITodoList {
   completed: boolean;
   created_at: string;
   id: string;
@@ -13,7 +13,7 @@ export interface IPaymeTodoList {
   updated_at: string;
   user: number;
 }
- export interface IPaymeTodoForm {
+ export interface ITodoForm {
   title: string;
   completed: boolean;
   user: number;

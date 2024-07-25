@@ -1,0 +1,19 @@
+<mat-toolbar>
+  <img ngSrc="assets/icon/payme-logo.webp" height="38" width="100" alt="" priority={true}>
+  <span class="example-spacer"></span>
+  <nav mat-tab-nav-bar [tabPanel]="tabPanel">
+    @for (link of links; track link) {
+      <a mat-tab-link
+         [routerLink]="link.url"
+         (click)="activeLink = link.url"
+         [active]="activeLink == link.url"
+         routerLinkActive="active"> {{ link.name }} </a>
+    }
+  </nav>
+</mat-toolbar>
+<mat-tab-nav-panel #tabPanel>
+  <div class="container">
+    <router-outlet></router-outlet>
+  </div>
+</mat-tab-nav-panel>
+

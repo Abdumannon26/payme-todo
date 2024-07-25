@@ -8,8 +8,9 @@ import {
   RouterStateSnapshot,
   UrlSegment
 } from '@angular/router';
-import {TokenService} from '@core/services/token.service';
-import {AuthService} from '@modules/auth/service/auth.service';
+import {TokenService} from "../services/token.service";
+import {AuthService} from "../services/auth.service";
+
 
 @Injectable({
   providedIn: 'root'
@@ -35,7 +36,8 @@ export class AuthenticatedUserGuard implements CanActivate, CanLoad {
     if (this.authService.isAuthenticated()) {
       return true;
     }
-    this.router.navigate(['/auth/login'], {queryParams: {returnUrl: url}});
+    this.router.navigate(['login'], {queryParams: {returnUrl: url}})
+      .catch();
     return false;
   }
 }

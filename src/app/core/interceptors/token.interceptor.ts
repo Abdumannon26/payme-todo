@@ -1,46 +1,23 @@
-import {Injectable} from '@angular/core';
-import {HttpEvent, HttpHandler, HttpInterceptor, HttpRequest} from '@angular/common/http';
-import {Observable} from 'rxjs';
-import {environment as env} from '@environments/environment';
-import {TokenService} from '@core/services/token.service';
-import {AuthService} from '@modules/auth/service/auth.service';
+import {HttpInterceptorFn} from '@angular/common/http';
+import {inject} from "@angular/core";
+import {TokenService} from "../services/token.service";
 
-@Injectable()
-export class TokenInterceptor implements HttpInterceptor {
 
-  constructor(private authService: AuthService,
-              private tokenService: TokenService) {
+export const tokenInterceptor: HttpInterceptorFn = (request, next) => {
+  let headers = {};
+  let token = inject(TokenService).getTokens()
+  if (!request.url.includes('login')) {
+    headers = {
+      'Access-Control-Allow-Origin': '*',
+      charset: 'utf-8',
+      setHeaders: {
+        Authorization: `Token ${token}`,
+        ...headers
+      }
+    };
   }
 
-  intercept(
-    request: HttpRequest<any>,
-    next: HttpHandler
-  ): Observable<HttpEvent<any>> {
-    let headers = {};
+  const tokenReq = request.clone(headers);
+  return next (tokenReq);
 
-    if (!request.url.includes(env.api.refresh)) {
-      headers = {
-        'Access-Control-Allow-Origin': '*',
-        charset: 'utf-8'
-      };
-      headers = {
-        setHeaders: {
-          Authorization: `Bearer ${this.getToken(request.url)}`,
-          ...headers
-        }
-      };
-    }
-
-    const tokenReq = request.clone(headers);
-    return next.handle(tokenReq);
-  }
-
-
-  private getToken(url: string): string {
-    if (url.includes(env.api.authenticate) || (url.includes(`/${env.api.setPassword}`) || url.includes(`/${env.api.identities}`)) && !url.includes(env.api.logout )) {
-      return this.authService.temporaryToken;
-    }
-
-    return this.tokenService.accessToken;
-  }
 }

@@ -1,64 +1,44 @@
-import { Injectable } from '@angular/core';
-import { Subject } from 'rxjs';
+import {Injectable} from '@angular/core';
 import {SessionStorageService} from "./session-storage.service";
+import {Router} from "@angular/router";
 
 @Injectable({
   providedIn: 'root'
 })
 export class TokenService {
-  refreshedToken$: Subject<boolean> = new Subject();
-
-  private _accessToken: string;
-  private _refreshToken: string;
+  private _token: string;
 
   constructor(
     private storage: SessionStorageService,
+    private router: Router
   ) {
   }
 
-  // get accessToken(): string {
-  //   if (!this._accessToken) {
-  //     this._accessToken = this.storage.get(ACCESS_TOKEN_KEY);
-  //   }
-  //   return this._accessToken;
-  // }
-  //
-  // get refreshToken(): string {
-  //   if (!this._refreshToken) {
-  //     this._refreshToken = this.storage.get(REFRESH_TOKEN_KEY);
-  //   }
-  //   return this._accessToken;
-  // }
-  //
-  // /**
-  //  * set tokens
-  //  */
-  // setTokens(meta: IHttpResponseMeta): void {
-  //   this._accessToken = meta.accessToken;
-  //   this._refreshToken = meta.refreshToken;
-  //   this.storage.set(ACCESS_TOKEN_KEY, meta.accessToken);
-  //   this.storage.set(REFRESH_TOKEN_KEY, meta.refreshToken);
-  //   this.refreshedToken$.next(true);
-  // }
-  //
-  // /**
-  //  * get tokens
-  //  */
-  // getTokens(): IToken {
-  //   return {
-  //     accessToken: this.storage.get(ACCESS_TOKEN_KEY),
-  //     refreshToken: this.storage.get(REFRESH_TOKEN_KEY),
-  //   };
-  // }
-  //
-  // /**
-  //  * clear tokens
-  //  */
-  // clearTokens(): void {
-  //   this.storage.remove(ACCESS_TOKEN_KEY);
-  //   this.storage.remove(REFRESH_TOKEN_KEY);
-  //   this._accessToken = null;
-  //   this._refreshToken = null;
-  // }
+  get token(): string {
+    if (!this._token) {
+      this._token = this.storage.get(TOKEN);
+    }
+    return this._token;
+  }
 
+  setTokens(token: string): void {
+    this._token = token;
+    this.storage.set(TOKEN, token);
+  }
+
+  getTokens(): any {
+    return this.storage.get(TOKEN)
+  }
+
+  clearTokens(): void {
+    this.storage.remove(TOKEN);
+  }
+
+  logout(): void {
+    this.clearTokens();
+    this.router.navigate(['/login'])
+      .catch();
+  }
 }
+
+export const TOKEN = 'token';
