@@ -1,0 +1,16 @@
+@import "src/app/core/scss/form";
+
+.form-group {
+  display: block;
+
+  .field-error {
+    color: #f5365c;
+    margin-top: 0.5rem;
+    display: block;
+    font-size: 14px;
+  }
+
+  > li {
+    display: list-item;
+  }
+}

@@ -1,0 +1,116 @@
+<div class="form-group">
+  <li class="field-error"
+      *ngIf="fieldControl?.hasError('password') && fieldControl?.touched">
+    Не правильный формат пароля
+    <ul>
+      <li class="field-error" *ngIf="fieldControl?.hasError('passMinLength')  && fieldControl?.touched">Поле не может
+        содержать менее 8 символов
+      </li>
+      <li class="field-error" *ngIf="fieldControl?.hasError('uppercaseLetter')  && fieldControl?.touched">Минимум 1
+        заглавная буква
+      </li>
+      <li class="field-error" *ngIf="fieldControl?.hasError('lowercaseLetter')  && fieldControl?.touched">Минимум 1
+        строчная буква
+      </li>
+      <li class="field-error" *ngIf="fieldControl?.hasError('specSymbols')  && fieldControl?.touched">Минимум 1
+        спец-символ(@#$!%*?&)
+      </li>
+      <li class="field-error" *ngIf="fieldControl?.hasError('numbers')  && fieldControl?.touched">Минимум 1 число</li>
+    </ul>
+  </li>
+
+  <li class="field-error"
+      *ngIf="fieldControl?.hasError('email') && fieldControl?.touched">
+    Не верный формат эл.почты
+  </li>
+
+  <li class="field-error"
+      *ngIf="fieldControl?.hasError('settingValidator') && fieldControl?.touched">
+    Заполните пустые поля
+  </li>
+
+  <li class="field-error"
+      *ngIf="fieldControl?.hasError('noUniquePhoneNumber') && fieldControl?.touched">
+    Номер телефона повторяеться
+  </li>
+
+  <li class="field-error"
+      *ngIf="fieldControl?.hasError('similarNumbers') && fieldControl?.touched">
+    Имеються похожие номера
+  </li>
+
+  <li class="field-error"
+      *ngIf="fieldControl?.hasError('eskhataEmail') && fieldControl?.touched">
+    Не верный формат эл.почты (@eskhata.tj)
+  </li>
+
+  <li class="field-error"
+      *ngIf="fieldControl?.hasError('phoneNumber') && fieldControl?.touched">
+    Не верный формат телефонного номера
+  </li>
+
+  <li class="field-error"
+      *ngIf="fieldControl?.hasError('confirmPassword') && fieldControl?.touched">
+    Пароль для подтверждения не совпадает
+  </li>
+
+  <li class="field-error"
+      *ngIf="fieldControl?.touched
+         && fieldControl?.hasError('required')
+         || fieldControl?.hasError('matDatepickerParse')
+         || fieldControl?.hasError('whiteSpace')">
+    Поле обязательно для заполнения
+  </li>
+
+  <li class="field-error"
+      *ngIf="fieldControl?.hasError('minlength')">
+    Поле должно содержать не менее {{fieldControl.getError('minlength').requiredLength}} символов
+  </li>
+
+  <li class="field-error"
+      *ngIf="fieldControl?.hasError('maxlength')">
+    Поле не может содержать более {{fieldControl?.getError('maxlength')?.requiredLength}} символов
+  </li>
+
+  <li class="field-error"
+      *ngIf="fieldControl?.hasError('min')">
+    Минимальное значение {{fieldControl.getError('min').min}}
+  </li>
+
+  <li class="field-error"
+      *ngIf="fieldControl?.touched && fieldControl?.hasError('typeNotSupported')">
+    Неподдерживаемый тип файла
+  </li>
+
+  <li class="field-error"
+      *ngIf="fieldControl?.hasError('invalidDateBefore') || fieldControl?.hasError('invalidDateAfter')">
+    Выбрана неверная дата
+  </li>
+
+  <li class="field-error"
+      *ngIf="fieldControl?.hasError('pattern') && fieldControl?.touched">
+    Не верный формат
+  </li>
+  <li class="field-error" *ngIf="fieldControl?.hasError('notPermission')">
+    Доступ запрещен!
+  </li>
+
+  <li class="field-error" *ngIf="fieldControl?.hasError('maxGradationValue') && fieldControl?.touched">
+    Максимальный размер {{fieldControl.getError('maxGradationValue')}}
+  </li>
+
+  <li class="field-error" *ngIf="fieldControl?.hasError('minIntervalGradation') && fieldControl?.touched">
+    Минимальное значение должно быть меньше максимальной
+  </li>
+
+  <li class="field-error" *ngIf="fieldControl?.hasError('maxIntervalGradation') && fieldControl?.touched">
+    Максимальное значение должно быть больше минимальной
+  </li>
+
+  <ng-container *ngIf="fieldControl?.hasError('serverErrors')">
+    <li class="field-error" *ngFor="let error of fieldControl.getError('serverErrors')">
+      {{error}}
+    </li>
+  </ng-container>
+
+</div>
